@@ -14,8 +14,9 @@ def rr(pincode):
 	jsond=r.json()
 	ret_list=[]
 	for i in (jsond["centers"]):
-		ret_list.append({"name": i["name"], "available_capacity": i["sessions"][0]["available_capacity"], "min age limit": i["sessions"][0]["min_age_limit"],
-						"vaccine": i["sessions"][0]["vaccine"], "date": i["sessions"][0]["date"]})
+		for j in i["sessions"]:
+			ret_list.append({"name": i["name"], "available_capacity": j["available_capacity"], "min age limit": j["min_age_limit"],
+							"vaccine": j["vaccine"], "date": j["date"]})
 	return ret_list
 
 def generic(green_bot,last_chat_id):
