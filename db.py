@@ -12,7 +12,7 @@ class DB():
         if x is not None:
             # update
             y = json.loads(x["value"])
-            y.append(value)
+            y.append(value) if value not in y else y
             self.remove_key(table_name,key)
             table = self.db.table(table_name)
             table.insert({"key": key, "value": json.dumps(y)})
@@ -51,7 +51,7 @@ class DB():
         if x is not None:
             # update
             y = json.loads(x["value"])
-            y.append(value)
+            y.append(value) if value not in y else y
             self.remove_ukey(table_name,key)
             table = self.db.table(table_name)
             table.insert({"key": key, "value": json.dumps(y)})

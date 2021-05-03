@@ -58,7 +58,7 @@ class BotHandler:
 		return last_update
 
 greet_bot = BotHandler(str(os.getenv("token","")))
-greetings = ('hello', 'hi', 'greetings', 'sup')
+greetings = ('hello', 'hi', 'greetings', 'sup', '/start')
 now = datetime.datetime.now()
 
 def bg_process(d):
