@@ -91,7 +91,8 @@ def main():
 			bg_process(d)
 			continue
 		print(last_update)
-
+		if "message" not in last_update.keys():
+			continue
 		last_update_id = last_update['update_id']
 		last_chat_text = last_update['message']['text']
 		last_chat_id = last_update['message']['chat']['id']
