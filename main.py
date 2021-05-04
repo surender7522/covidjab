@@ -45,7 +45,7 @@ def bg_process(d: db.DB, bot:telegram.Bot):
 					if yy["available_capacity"] > 0:
 						for x in json.loads(a["value"]):
 							print(x)
-							bot.send_message(x, text="Alert! Capacity now available at {}".format(json.dumps(yy, indent=2)))
+							bot.send_message(x, text="Alert! Capacity now available at {}\n To stop this alert, send 'unsub {}'.".format(json.dumps(yy, indent=2),a["key"]))
 
 
 # Enable logging
@@ -97,13 +97,18 @@ def echo(bot: telegram.Bot) -> None:
 					today += 1
 				elif split:
 					if split[0] == "pin":
+						if len(split)<=1:
+							update.message.reply_text("Please enter a valid pincode for example 'pin 123123'")
+							continue
 						msg = rr(split[1])
 						print(msg)
 						if msg == []:
 							msg.append("No sessions available")
 						update.message.reply_text(json.dumps(msg, indent=2))
 					elif split[0] == "sub":
-
+						if len(split)<=1:
+							update.message.reply_text("Please enter a valid pincode, for example 'sub 123123'")
+							continue
 						if len(split[1]) == 6:
 							try:
 								int(split[1])
@@ -116,6 +121,10 @@ def echo(bot: telegram.Bot) -> None:
 						else:
 							update.message.reply_text("Please enter a valid pincode, for example 'sub 123123'")
 					elif split[0] == "unsub":
+						print(split)
+						if len(split)<=1:
+							update.message.reply_text("Please enter a valid pincode, for example 'unsub 123123'")
+							continue
 						if len(split[1]) == 6:
 							try:
 								int(split[1])
@@ -155,7 +164,7 @@ def main() -> NoReturn:
 	"""Run the bot."""
 	global UPDATE_ID
 	# Telegram Bot Authorization Token
-	bot = telegram.Bot('TOKEN')
+	bot = telegram.Bot('1762717468:AAHYP8SlKCYYwS9O1JB_TskYWqIYuf2smA8')
 
 	# get the first pending update_id, this is so we can skip over it in case
 	# we get an "Unauthorized" exception.
