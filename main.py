@@ -103,7 +103,7 @@ def main():
 		print(last_chat_name)
 		print(today)
 		print(hour)
-		split = last_chat_text.split(" ")
+		split = last_chat_text.lower().split(" ")
 		if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
 			greet_bot.send_message(last_chat_id, 'Good Morning  {}'.format(last_chat_name))
 			generic(green_bot=greet_bot,last_chat_id=last_chat_id)
